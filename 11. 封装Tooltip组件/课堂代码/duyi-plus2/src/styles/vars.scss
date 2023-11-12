@@ -1,0 +1,85 @@
+// 该文件主要是负责定义全局的样式变量，例如颜色、字体大小等等
+
+// 主题色
+$colors: (
+  primary: #409eff,
+  success: #67c23a,
+  warning: #e6a23c,
+  danger: #f56c6c,
+  info: #909399
+);
+
+:root {
+  // 接下来我们需要生成主题色和不同亮度的颜色
+  @each $val, $color in $colors {
+    // 生成主题颜色
+    --duyi-color-#{$val}: #{$color};
+    // 还需要生成不同亮度的颜色
+    @for $i from 1 through 4 {
+      --duyi-color-#{$val}-light-#{2 * $i + 1}: #{mix(#fff, $color, ((2 * $i + 1) * 10 * 1%))};
+    }
+    // dark2 和 light8 因为不符合上面的规律，我们在下面单独来生成
+    --duyi-color-#{$val}-light-8: #{mix(#fff, $color, 80 * 1%)}; // 80% 亮度
+    --duyi-color-#{$val}-dark-2: #{mix(
+        #000,
+        $color,
+        20 * 1%
+      )}; // 注意，dark是和黑色进行混合，20% 亮度
+  }
+
+  // 接下来，还有一些其他的颜色变量
+  // 对应的是 ElementUI 里面的中性色
+  --duyi-color-white: #fff;
+  --duyi-color-black: #000;
+  --duyi-bg-color: #ffffff;
+  --duyi-bg-color-page: #f2f3f5;
+  --duyi-bg-color-overlay: #ffffff;
+  --duyi-text-color-primary: #303133;
+  --duyi-text-color-regular: #606266;
+  --duyi-text-color-secondary: #909399;
+  --duyi-text-color-placeholder: #a8abb2;
+  --duyi-text-color-disabled: #c0c4cc;
+  --duyi-border-color: #dcdfe6;
+  --duyi-border-color-light: #e4e7ed;
+  --duyi-border-color-lighter: #ebeef5;
+  --duyi-border-color-extra-light: #f2f6fc;
+  --duyi-border-color-dark: #d4d7de;
+  --duyi-border-color-darker: #cdd0d6;
+  --duyi-fill-color: #f0f2f5;
+  --duyi-fill-color-light: #f5f7fa;
+  --duyi-fill-color-lighter: #fafafa;
+  --duyi-fill-color-extra-light: #fafcff;
+  --duyi-fill-color-dark: #ebedf0;
+  --duyi-fill-color-darker: #e6e8eb;
+  --duyi-fill-color-blank: #ffffff;
+
+  // 和 border 相关的变量
+  --duyi-border-width: 1px;
+  --duyi-border-style: solid;
+  --duyi-border-color-hover: var(--duyi-text-color-disabled);
+  --duyi-border: var(--duyi-border-width) var(--duyi-border-style) var(--duyi-border-color);
+  --duyi-border-radius-base: 4px;
+  --duyi-border-radius-small: 2px;
+  --duyi-border-radius-round: 20px;
+  --duyi-border-radius-circle: 100%;
+
+  // 和 font 相关的变量
+  --duyi-font-size-extra-large: 20px;
+  --duyi-font-size-large: 18px;
+  --duyi-font-size-medium: 16px;
+  --duyi-font-size-base: 14px;
+  --duyi-font-size-small: 13px;
+  --duyi-font-size-extra-small: 12px;
+  --duyi-font-family: 'Helvetica Neue', Helvetica, 'PingFang SC', 'Hiragino Sans GB',
+    'Microsoft YaHei', '\5fae\8f6f\96c5\9ed1', Arial, sans-serif;
+  --duyi-font-weight-primary: 500;
+
+  // 和 disabled 相关的变量
+  --duyi-disabled-bg-color: var(--duyi-fill-color-light);
+  --duyi-disabled-text-color: var(--duyi-text-color-placeholder);
+  --duyi-disabled-border-color: var(--duyi-border-color-light);
+
+  // 和 transition 过渡相关的变量
+  --duyi-transition-duration: 0.3s;
+  --duyi-transition-duration-fast: 0.2s;
+}

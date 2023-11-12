@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="./umd/style.css" />
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script src="./umd/duyi-plus.umd.cjs"></script>
+  </head>
+  <body>
+    <div id="app">
+      {{ message }}
+      <Duyi-Button>默认按钮</Duyi-Button>
+      <Duyi-Button type="primary">主要按钮</Duyi-Button>
+      <Duyi-Button type="info">信息按钮</Duyi-Button>
+      <Duyi-Button type="success">成功按钮</Duyi-Button>
+      <Duyi-Button type="warning">警告按钮</Duyi-Button>
+      <Duyi-Button type="danger">危险按钮</Duyi-Button>
+      <Duyi-Card
+        img-src="/web.png"
+        summary="前端主流布局系统进阶与实战，轻松解决页面布局难题"
+      />
+    </div>
+    <script>
+      const { createApp, ref } = Vue;
+
+      const app = createApp({
+        setup() {
+          const message = ref("Hello vue!");
+          return {
+            message,
+          };
+        },
+      });
+
+      app.use(DuyiPlus);
+
+      app.mount("#app");
+    </script>
+  </body>
+</html>
